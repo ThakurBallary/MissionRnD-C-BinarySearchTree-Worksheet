@@ -33,28 +33,26 @@ struct node{
 	struct node *right;
 };
 
-struct node * get_misplaced_node(struct node *root, struct node *misplaced) {
+void get_misplaced_node(struct node *root, struct node **prev, struct node **misplaced1, struct node **misplaced2, struct node **misplacedRoot) {
 	if (!root) {
-		return NULL;
+		return;
 	}
-	if (root->left != NULL) {
-		if (root->data < root->left->data && root->left != misplaced) {
-			return root->left;
+	get_misplaced_node(root->left, prev, misplaced1, misplaced2, misplacedRoot);
+	if (*prev != NULL) {
+		if ((*prev)->data > root->data) {
+			if (*misplaced1 == NULL) {
+				*misplaced1 = *prev;
+				*misplacedRoot = root;
+			}
+			else {
+				*misplaced2 = root;
+				return;
+			}
 		}
 	}
-	if (root->right != NULL) {
-		if (root->data > root->right->data && root->right != misplaced) {
-			return root->right;
-		}
-	}
-	
-	struct node *misplacedLeft = get_misplaced_node(root->left, misplaced);
-	if (misplacedLeft) {
-		return misplacedLeft;
-	}
-	else {
-		return get_misplaced_node(root->right, misplaced);
-	}	
+	*prev = root;
+	get_misplaced_node(root->right, prev, misplaced1, misplaced2, misplacedRoot);
+
 }
 
 void swap(struct node *a, struct node *b) {
@@ -67,7 +65,16 @@ void fix_bst(struct node *root){
 	if (!root) {
 		return;
 	}
-	struct node *misplaced1 = get_misplaced_node(root, NULL);
-	struct node *misplaced2 = get_misplaced_node(root, misplaced1);
-	swap(misplaced1, misplaced2);
+	
+	struct node *misplaced1 = NULL;
+	struct node *misplaced2 = NULL;
+	struct node *mispalcedRoot = NULL;
+	struct node *prev = NULL;
+	get_misplaced_node(root, &prev, &misplaced1, &misplaced2, &mispalcedRoot);
+	if (misplaced2) {
+		swap(misplaced1, misplaced2);
+	}
+	else {
+		swap(misplaced1, mispalcedRoot);
+	}
 }

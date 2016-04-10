@@ -52,8 +52,8 @@ void printBST(struct node *root){
 int main(){
 
 	//Use it for testing ,Creating BST etc
-	/*
-	int arr[] = { 9, 4, 20, 1, 30 };
+	
+	int arr[] = { 50, 25, 75, 15, 35, 90, 5, 17, 45, 120, 1, 2, 19, 39, 49, 100 };
 	int len = sizeof(arr) / sizeof(arr[0]);
 	struct node *root = NULL;
 	for (int i = 0; i < len; i++) {
@@ -61,7 +61,7 @@ int main(){
 	}
 	printBST(root);
 	printf("\n");
-	*/
+	
 
 	// BSTTransversals
 	/*
@@ -100,10 +100,21 @@ int main(){
 	*/
 
 	//FixBST
-	/*
+	/* 9, 4, 20, 1, 30
 	int temp = ((root)->right)->data;
 	((root)->right)->data = (((root)->left)->left)->data;
 	(((root)->left)->left)->data = temp;
+	*/
+	// 2, 1, 3
+	/*
+	int temp = root->left->data;
+	root->left->data = root->right->data;
+	root->right->data = temp;
+	*/
+	// 50, 25, 75, 15, 35, 90, 5, 17, 45, 120, 1, 2, 19, 39, 49, 100
+	int temp = root->left->right->right->left->data;
+	root->left->right->right->left->data = root->right->right->right->left->data;
+	root->right->right->right->left->data = temp;
 	printf("BST after misplaced\n");
 	printBST(root);
 	printf("\n");
@@ -111,8 +122,7 @@ int main(){
 	printf("BST after fix\n");
 	printBST(root);
 	printf("\n");
-	*/
-
+	
 	// SortedArraytoBST
 	/*
 	int arr[] = { 1, 2, 3, 4, 5 };
@@ -124,6 +134,5 @@ int main(){
 
 	// BSTClosestLeafDistance
 	
-
 	return 0;
 }
