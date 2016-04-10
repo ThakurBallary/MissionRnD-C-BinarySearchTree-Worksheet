@@ -10,12 +10,12 @@ Ex : If Bst is
  / \   \
 1   5   15                   <-- Order her is 15 ,5 ,1 
           \
-          17
+		  17
 
 Output will be a array consisting of [6,10,4,15,5,1,17];
 
 Input : BST head node ;
-Output :Return An array which has All the elements in row by row order (R->L) .
+Output :Return Akn array which has All the elements in row by row order (R->L) .
 
 Note : Return -1 for Invalid Cases .
 */
@@ -29,9 +29,57 @@ struct node{
 	struct node *right;
 };
 
+int countNodes(struct node *root) {
+	if (!root) {
+		return 0;
+	}
+	int count = 1 + countNodes(root->left) + countNodes(root->right);
+	return count;
+}
+
+int enqueue(struct node **queue, int rear, struct node *root) {
+	if (!root) {
+		return rear;
+	}
+	queue[rear] = root;
+	rear++;
+	return rear;
+}
+
+struct node * dequeue(struct node **queue, int front) {
+	return queue[front];
+}
+
+int* addData(struct node **queue, int rear, int front, int *BSTRowsArr, int i, struct node *root) {
+	if (!root) {
+		return NULL;
+	}
+
+	while (front != rear) {
+		rear = enqueue(queue, rear, (queue[front])->right);
+		rear = enqueue(queue, rear, (queue[front])->left);
+		struct node *node = dequeue(queue, front);
+		BSTRowsArr[i] = node->data;
+		i++;
+		front++;
+	}	
+		
+	return BSTRowsArr;
+}
 
 
 int* BSTRighttoLeftRows(struct node* root)
 {
-    return NULL;
+	if (!root) {
+		return NULL;
+	}
+	int noOfNodes = countNodes(root);
+	struct node *queue[100];
+	int rear = enqueue(queue, 0, root);
+	int front = 0;
+	int *BSTRowsArr = (int*)malloc(sizeof(int) * noOfNodes);
+	int i = 0;
+	BSTRowsArr = addData(queue, rear, front, BSTRowsArr, i, root);
+
+	return BSTRowsArr;
 }

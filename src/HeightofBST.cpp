@@ -9,7 +9,7 @@ Height of a BST which has only one node is 1
 Ex Input : 
 
     10 
-    /\
+	/\
    5 80
   /  /
  2  50
@@ -40,17 +40,41 @@ struct node{
 	struct node *right;
 };
 
-
 int get_height(struct node *root){
+	if (!root) {
+		return 0;
+	}
+	int leftHeight = get_height(root->left);
+	leftHeight++;
+	int rightHeight = get_height(root->right);	
+	rightHeight++;
+	if (leftHeight > rightHeight) {
+		return leftHeight;
+	}
+	else {
+		return rightHeight;
+	}
+}
 
-	return 0;
+int TreeSum(struct node *root) {
+	if (!root) {
+		return 0;
+	}
+	int sum = root->data + TreeSum(root->left) + TreeSum(root->right);
+	return sum;
 }
 
 int get_left_subtree_sum(struct node *root){
-	return 0;
+	if (!root) {
+		return 0;
+	}
+	return TreeSum(root->left);
 }
 
 int get_right_subtree_sum(struct node *root){
-	return 0;
+	if (!root) {
+		return 0;
+	}
+	return TreeSum(root->right);
 }
 

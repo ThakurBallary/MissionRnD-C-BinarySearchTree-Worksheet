@@ -22,14 +22,54 @@ struct node{
 	struct node *right;
 };
 
+int inorder_rec(struct node *root, int *arr, int i) {
+	if (!root) {
+		return i;
+	}
+	i = inorder_rec(root->left, arr, i);
+	arr[i++] = root->data;
+	i = inorder_rec(root->right, arr, i);
+	return i;
+}
+void inorder(struct node *root, int *arr) {
+	if (!root || !arr) {
+		return;
+	}
+	int i = 0;
+	i = inorder_rec(root, arr, i);
+}
 
-void inorder(struct node *root, int *arr){
-	
+int preorder_rec(struct node *root, int *arr, int i) {
+	if (!root) {
+		return i;
+	}
+	arr[i++] = root->data;
+	i = preorder_rec(root->left, arr, i);
+	i = preorder_rec(root->right, arr, i);
+	return i;
 }
 void preorder(struct node *root, int *arr){
-	
+	if (!root || !arr) {
+		return;
+	}
+	int i = 0;
+	i = preorder_rec(root, arr, i);
+}
+
+int postorder_rec(struct node *root, int *arr, int i) {
+	if (!root) {
+		return i;
+	}
+	i = postorder_rec(root->left, arr, i);
+	i = postorder_rec(root->right, arr, i);
+	arr[i++] = root->data;
+	return i;
 }
 void postorder(struct node *root, int *arr){
-	
+	if (!root || !arr) {
+		return;
+	}
+	int i = 0;
+	i = postorder_rec(root, arr, i);
 }
 
