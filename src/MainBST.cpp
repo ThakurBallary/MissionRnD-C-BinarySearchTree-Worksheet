@@ -52,6 +52,7 @@ void printBST(struct node *root){
 int main(){
 
 	//Use it for testing ,Creating BST etc
+	/*
 	int arr[] = { 9, 4, 20, 1, 30 };
 	int len = sizeof(arr) / sizeof(arr[0]);
 	struct node *root = NULL;
@@ -60,7 +61,8 @@ int main(){
 	}
 	printBST(root);
 	printf("\n");
-	
+	*/
+
 	// BSTTransversals
 	/*
 	int *arr1 = (int *)malloc(sizeof(int) * len);
@@ -110,4 +112,18 @@ int main(){
 	printBST(root);
 	printf("\n");
 	*/
+
+	// SortedArraytoBST
+	/*
+	int arr[] = { 1, 2, 3, 4, 5 };
+	int len = sizeof(arr) / sizeof(arr[0]);
+	struct node * root = convert_array_to_bst(arr, len);
+	printBST(root);
+	printf("\n");
+	*/
+
+	// BSTClosestLeafDistance
+	
+
+	return 0;
 }

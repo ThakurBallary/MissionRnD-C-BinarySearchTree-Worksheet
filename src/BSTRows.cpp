@@ -67,7 +67,6 @@ int* addData(struct node **queue, int rear, int front, int *BSTRowsArr, int i, s
 	return BSTRowsArr;
 }
 
-
 int* BSTRighttoLeftRows(struct node* root)
 {
 	if (!root) {
