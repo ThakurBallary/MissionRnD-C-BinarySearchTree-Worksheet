@@ -50,20 +50,15 @@ struct node * dequeue(struct node **queue, int front) {
 	return queue[front];
 }
 
-int* addData(struct node **queue, int rear, int front, int *BSTRowsArr, int i, struct node *root) {
-	if (!root) {
-		return NULL;
-	}
-
-	while (front != rear) {
+int* addData(struct node **queue, int rear, int front, int *BSTRowsArr, int i) {
+	while (front < rear) {
 		rear = enqueue(queue, rear, (queue[front])->right);
 		rear = enqueue(queue, rear, (queue[front])->left);
 		struct node *node = dequeue(queue, front);
 		BSTRowsArr[i] = node->data;
 		i++;
 		front++;
-	}	
-		
+	}		
 	return BSTRowsArr;
 }
 
@@ -78,7 +73,7 @@ int* BSTRighttoLeftRows(struct node* root)
 	int front = 0;
 	int *BSTRowsArr = (int*)malloc(sizeof(int) * noOfNodes);
 	int i = 0;
-	BSTRowsArr = addData(queue, rear, front, BSTRowsArr, i, root);
+	BSTRowsArr = addData(queue, rear, front, BSTRowsArr, i);
 
 	return BSTRowsArr;
 }
