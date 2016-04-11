@@ -53,7 +53,7 @@ int main(){
 
 	//Use it for testing ,Creating BST etc
 	
-	int arr[] = { 50, 25, 75, 15, 35, 90, 5, 17, 45, 120, 1, 2, 19, 39, 49, 100 };
+	int arr[] = { 2, 1, 4, 3 };//50, 25, 75, 15, 35, 90, 5, 17, 45, 120, 1, 7, 19, 39, 49, 100, 20, 21, 22, 23 };
 	int len = sizeof(arr) / sizeof(arr[0]);
 	struct node *root = NULL;
 	for (int i = 0; i < len; i++) {
@@ -112,6 +112,7 @@ int main(){
 	root->right->data = temp;
 	*/
 	// 50, 25, 75, 15, 35, 90, 5, 17, 45, 120, 1, 2, 19, 39, 49, 100
+	/*
 	int temp = root->left->right->right->left->data;
 	root->left->right->right->left->data = root->right->right->right->left->data;
 	root->right->right->right->left->data = temp;
@@ -122,7 +123,8 @@ int main(){
 	printf("BST after fix\n");
 	printBST(root);
 	printf("\n");
-	
+	*/
+
 	// SortedArraytoBST
 	/*
 	int arr[] = { 1, 2, 3, 4, 5 };
@@ -133,6 +135,7 @@ int main(){
 	*/
 
 	// BSTClosestLeafDistance
-	
+	int closest_leaf_distance = get_closest_leaf_distance(root, root->right);//->left->left->right);
+	printf("\n%d", closest_leaf_distance);
 	return 0;
 }
